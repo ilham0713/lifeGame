@@ -99,10 +99,13 @@ fun gameOfLife(board: Array<Array<Int>>): Array<Array<Int>> {
 
 
 
-fun runGameofLife(startingBoards:Array<Array<Array<Int>>>){
+fun runGameOfLife(startingBoards:Array<Array<Array<Int>>>, iterations: Int){
     for (board in startingBoards){
-        var ans = (gameOfLife(board))
-        printBoard(board, ans)
+        var prevBoard = board
+        for(i in 0 until iterations){
+            prevBoard = gameOfLife(prevBoard)
+        }
+        printBoard(board, prevBoard)
     }
 }
 

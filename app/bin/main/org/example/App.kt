@@ -13,5 +13,5 @@ class App {
 
 fun main() {
     val startingBoards = Boards.getBoards()
-    runGameofLife(startingBoards)
+    runGameOfLife(startingBoards, 50)
 }
