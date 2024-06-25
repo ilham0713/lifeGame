@@ -12,5 +12,6 @@ class App {
 }
 
 fun main() {
+    val startingBoards = Boards.getBoards()
     println(App().greeting)
 }
