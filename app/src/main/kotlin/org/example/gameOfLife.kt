@@ -9,7 +9,8 @@ val directions = arrayOf(
     arrayOf(0, 1), 
     arrayOf(1, -1), 
     arrayOf(1, 0), 
-    arrayOf(1, 1))
+    arrayOf(1, 1)
+)
 
 fun printBoard(start: Array<Array<Int>>, answer: Array<Array<Int>>){
     var rows = start.size
@@ -29,14 +30,15 @@ fun printBoard(start: Array<Array<Int>>, answer: Array<Array<Int>>){
     println()
 }
 
-fun inBounds(x:Int, y:Int, board:Array<Array<Int>>): Boolean{
+fun inBounds(x:Int, y:Int, board:Array<Array<Int>>): Boolean {
     val rows = board.size
     val cols = board[0].size
-    if(x>=0&& y>=0 && x<rows && y<cols){
-        return true
-    }else{
-        return false
-    }
+    return x in 0 until rows && y in 0 until cols
+    // if(x>=0&& y>=0 && x<rows && y<cols){
+    //     return true
+    // }else{
+    //     return false
+    // }
 }
 
 // fun isEdge(x:Int, y:Int, board:Array<Array<Int>>): Boolean{
@@ -59,7 +61,7 @@ fun inBounds(x:Int, y:Int, board:Array<Array<Int>>): Boolean{
 // }
 
 fun checkNeighbors(x:Int, y:Int, board: Array<Array<Int>>): Int{
-    var count: Int = 0
+    var count=0
     for(dir in directions){
         val nx = dir[0]+x
         val ny = dir[1]+y
@@ -71,28 +73,30 @@ fun checkNeighbors(x:Int, y:Int, board: Array<Array<Int>>): Int{
 }
 
 fun gameOfLife(board:Array<Array<Int>>):Array<Array<Int>>{
-    var newBoard = board
+    val rows = board.size
+    val cols = board[0].size
+    val newBoard = Array(rows) { Array(cols) { 0 } }
     for (i in board.indices){
         for (j in board[0].indices){
             // if (isEdge(i, j, board)){
             // }else 
             val liveNeighbors: Int = checkNeighbors(i, j, board)
             //dead
-            if(board[i][j]==0)(
+            if (board[i][j]==0) {
                 if(liveNeighbors==3){
                     newBoard[i][j] = 1
                     println("first changed ${board[i][j]} to ${newBoard[i][j]} at $i $j")
+                }else {
+                    newBoard[i][j] = board[i][j]
                 }
-            //live
-            )else{
-                if(liveNeighbors>3){
+            } else {
+                if(liveNeighbors>3||liveNeighbors<2){
                     newBoard[i][j] = 0
                     println("secon changed ${board[i][j]} to ${newBoard[i][j]} at $i $j")
+                }else {
+                    newBoard[i][j] = board[i][j]
                 }
-                if(liveNeighbors<2){
-                    newBoard[i][j] = 0
-                    println("third changed ${board[i][j]} to ${newBoard[i][j]} at $i $j")
-                }
+
             }
         }
     }
