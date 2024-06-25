@@ -11,6 +11,24 @@ val directions = arrayOf(
     arrayOf(1, 0), 
     arrayOf(1, 1))
 
+fun printBoard(start: Array<Array<Int>>, answer: Array<Array<Int>>){
+
+    var rows = start.size
+    var cols = start[0].size
+    for(i in 0 until rows){
+        for(j in 0 until cols){
+            print("${start[i][j]} ")
+        }
+        print("    ")
+        for(j in 0 until cols){
+            print("${answer[i][j]} ")
+        }
+        println()
+
+    }
+
+}
+
 fun inBounds(x:Int, y:Int, board:Array<Array<Int>>): Boolean{
     val rows = board.size
     val cols = board[0].size
@@ -32,11 +50,11 @@ fun inBounds(x:Int, y:Int, board:Array<Array<Int>>): Boolean{
 // }
 
 fun checkNeighbors(x:Int, y:Int, board: Array<Array<Int>>): Int{
-    Int count = 0
+    var count: Int = 0
     for(dir in directions){
-        nx = dir[0]+x
-        ny = dir[1]+y
-        if(inBounds(nx, ny, board) && board[nr][nc] == 1){
+        val nx = dir[0]+x
+        val ny = dir[1]+y
+        if(inBounds(nx, ny, board) && board[nx][ny] == 1){
             count++
         }
     }
@@ -60,7 +78,7 @@ fun gameOfLife(board:Array<Array<Int>>):Array<Array<Int>>{
             // if (isEdge(i, j, board)){
 
             // }else 
-            liveNeighbors = checkNeighbors(i, j)
+            val liveNeighbors: Int = checkNeighbors(i, j, board)
             //dead
             if(board[i][j]==0)(
                 if(liveNeighbors==3){
@@ -80,10 +98,10 @@ fun gameOfLife(board:Array<Array<Int>>):Array<Array<Int>>{
     return newBoard
 }
 
-fun runGameofLife(startingBoards:Array<Array<Array<Int>>>):MutableList<Array<Array<Int>>>{
-    var ans:MutableList<Array<Array<Int>>> = mutableListOf()
+fun runGameofLife(startingBoards:Array<Array<Array<Int>>>){
     for (board in startingBoards){
-        ans.add(gameOfLife(board))
+        var ans = (gameOfLife(board))
+        printBoard(board, ans)
     }
-    return ans
 }
+
