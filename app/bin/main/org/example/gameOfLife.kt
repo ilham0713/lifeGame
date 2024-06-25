@@ -72,36 +72,32 @@ fun checkNeighbors(x:Int, y:Int, board: Array<Array<Int>>): Int{
     return count
 }
 
-fun gameOfLife(board:Array<Array<Int>>):Array<Array<Int>>{
+fun gameOfLife(board: Array<Array<Int>>): Array<Array<Int>> {
     val rows = board.size
     val cols = board[0].size
-    val newBoard = Array(rows) { Array(cols) { 0 } }
-    for (i in board.indices){
-        for (j in board[0].indices){
-            // if (isEdge(i, j, board)){
-            // }else 
-            val liveNeighbors: Int = checkNeighbors(i, j, board)
-            //dead
-            if (board[i][j]==0) {
-                if(liveNeighbors==3){
+    var newBoard = Array(rows) { Array(cols) { 0 } }
+
+    for (i in board.indices) {
+        for (j in board[0].indices) {
+            val liveNeighbors = checkNeighbors(i, j, board)
+
+            if (board[i][j] == 0) {
+                if (liveNeighbors == 3) {
                     newBoard[i][j] = 1
-                    println("first changed ${board[i][j]} to ${newBoard[i][j]} at $i $j")
-                }else {
-                    newBoard[i][j] = board[i][j]
                 }
             } else {
-                if(liveNeighbors>3||liveNeighbors<2){
+                if (liveNeighbors < 2 || liveNeighbors > 3) {
                     newBoard[i][j] = 0
-                    println("secon changed ${board[i][j]} to ${newBoard[i][j]} at $i $j")
-                }else {
+                } else {
                     newBoard[i][j] = board[i][j]
                 }
-
             }
         }
     }
     return newBoard
 }
+
+
 
 fun runGameofLife(startingBoards:Array<Array<Array<Int>>>){
     for (board in startingBoards){
