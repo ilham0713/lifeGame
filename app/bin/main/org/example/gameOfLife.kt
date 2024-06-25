@@ -12,7 +12,6 @@ val directions = arrayOf(
     arrayOf(1, 1))
 
 fun printBoard(start: Array<Array<Int>>, answer: Array<Array<Int>>){
-
     var rows = start.size
     var cols = start[0].size
     for(i in 0 until rows){
@@ -26,7 +25,8 @@ fun printBoard(start: Array<Array<Int>>, answer: Array<Array<Int>>){
         println()
 
     }
-
+    println()
+    println()
 }
 
 fun inBounds(x:Int, y:Int, board:Array<Array<Int>>): Boolean{
@@ -49,6 +49,15 @@ fun inBounds(x:Int, y:Int, board:Array<Array<Int>>): Boolean{
 //     }
 // }
 
+//was for if i changed the way I handle edges 
+// fun checkDeadNeighbors(x:Int, y:Int): Int{
+//     /*
+//     returns dead cells
+    
+//     */
+//     return 0
+// }
+
 fun checkNeighbors(x:Int, y:Int, board: Array<Array<Int>>): Int{
     var count: Int = 0
     for(dir in directions){
@@ -61,36 +70,28 @@ fun checkNeighbors(x:Int, y:Int, board: Array<Array<Int>>): Int{
     return count
 }
 
-// fun checkDeadNeighbors(x:Int, y:Int): Int{
-//     /*
-//     returns dead cells
-    
-//     */
-//     return 0
-// }
-
-
-
 fun gameOfLife(board:Array<Array<Int>>):Array<Array<Int>>{
     var newBoard = board
     for (i in board.indices){
         for (j in board[0].indices){
             // if (isEdge(i, j, board)){
-
             // }else 
             val liveNeighbors: Int = checkNeighbors(i, j, board)
             //dead
             if(board[i][j]==0)(
                 if(liveNeighbors==3){
                     newBoard[i][j] = 1
+                    println("first changed ${board[i][j]} to ${newBoard[i][j]} at $i $j")
                 }
             //live
             )else{
                 if(liveNeighbors>3){
                     newBoard[i][j] = 0
+                    println("secon changed ${board[i][j]} to ${newBoard[i][j]} at $i $j")
                 }
                 if(liveNeighbors<2){
                     newBoard[i][j] = 0
+                    println("third changed ${board[i][j]} to ${newBoard[i][j]} at $i $j")
                 }
             }
         }

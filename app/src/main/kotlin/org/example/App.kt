@@ -13,6 +13,5 @@ class App {
 
 fun main() {
     val startingBoards = Boards.getBoards()
-    val ans = gameOfLife(startingBoards[0])
-    printBoard(startingBoards[0], ans)
+    runGameofLife(startingBoards)
 }
