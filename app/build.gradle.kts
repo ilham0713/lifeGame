@@ -5,10 +5,6 @@
  * For more details on building Java & JVM projects, please refer to https://docs.gradle.org/8.8/userguide/building_java_projects.html in the Gradle documentation.
  */
 
-val ktor_version: String by project
-val kotlin_version: String by project
-val logback_version: String by project
-val junit_version: String by project
 
 plugins {
     // Apply the org.jetbrains.kotlin.jvm Plugin to add support for Kotlin.
